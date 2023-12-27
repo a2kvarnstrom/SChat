@@ -1,4 +1,3 @@
-from os import mkdir
 import os
 
 userExists = False
@@ -20,7 +19,7 @@ def login():
         f.write(user)
     
 def newchat(recipient):
-    mkdir("./src/chats/" + recipient + "/")
+    os.mkdir("./src/chats/" + recipient + "/")
 
 def changeRecipient():
     recipient = input("Who do you want the recipient to be?\n" + open("./src/userlist.txt", "r"))
