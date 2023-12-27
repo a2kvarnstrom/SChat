@@ -11,7 +11,7 @@ def login():
         [sg.Text("Enter your Username"), sg.InputText()],
         [sg.Button("Enter"), sg.Button("Cancel")]
     ]
-    
+
     loginWindow = sg.Window("Login", layout)
 
     event, values = loginWindow.read()

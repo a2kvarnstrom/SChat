@@ -17,10 +17,14 @@ def search_str(file_path, word):
 def login(user):
     file_path = "C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt"
     if search_str("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt", user) == True:
-        return print("User exists lol")
+        return True
     else:
         f = open("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt", "a")
         f.write("\n" + user)
+        return False
+
+def new_func():
+    return
     
 def newchat(recipient):
     os.mkdir("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/chats/" + recipient + "/")
