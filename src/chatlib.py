@@ -1,6 +1,8 @@
 from os import mkdir
 import os
 
+userExists = False
+
 def search_str(file_path, word):
     with open(file_path, "r") as file:
         content = file.read()
@@ -10,8 +12,8 @@ def search_str(file_path, word):
             userExists = False
 
 def login():
-    user = input("Enter your username (You cant change it): ")
-    if search_str("./src/userlist.txt", userExists) == True:
+    user = input("Enter your username:\n")
+    if search_str("./src/userlist.txt", user) == True:
         return
     else:
         f = open("./src/userlist.txt", "a")
@@ -23,11 +25,14 @@ def newchat(recipient):
 def changeRecipient():
     recipient = input("Who do you want the recipient to be?\n" + open("./src/userlist.txt", "r"))
 
-def write(str, recipient):
+def write(msg, recipient):
     rfile = "./src/chats/" + recipient
     f = open(rfile + "/msg.txt", "w")
-    f.write(str)
+    f.write(msg)
     f = open(rfile + "/msglist.txt", "a")
-    f.write(str + "\n")
+    f.write(msg + "\n")
     f = open(rfile + "/msg.txt", "r")
     print(f.read())
+    f.close()
+    f = open(rfile + "/msglist.txt", "a")
+    f.close()
