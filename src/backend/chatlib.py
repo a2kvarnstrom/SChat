@@ -1,4 +1,8 @@
 import os
+import PySimpleGUI as sg
+import sys
+sys.path.append("C:/Users/a2kva/Documents/GitHub/SChat/src/frontend")
+import frontlib as front
 
 userExists = False
 
@@ -10,22 +14,22 @@ def search_str(file_path, word):
         else:
             userExists = False
 
-def login():
-    user = input("Enter your username:\n")
-    if search_str("./src/userlist.txt", user) == True:
-        return
+def login(user):
+    file_path = "C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt"
+    if search_str("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt", user) == True:
+        return print("User exists lol")
     else:
-        f = open("./src/userlist.txt", "a")
-        f.write(user)
+        f = open("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt", "a")
+        f.write("\n" + user)
     
 def newchat(recipient):
-    os.mkdir("./src/chats/" + recipient + "/")
+    os.mkdir("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/chats/" + recipient + "/")
 
 def changeRecipient():
-    recipient = input("Who do you want the recipient to be?\n" + open("./src/userlist.txt", "r"))
+    recipient = input("Who do you want the recipient to be?\n" + open("C:/Users/a2kva/Documents/GitHub/SChat/src/backend/userlist.txt", "r"))
 
 def write(msg, recipient):
-    rfile = "./src/chats/" + recipient
+    rfile = "C:/Users/a2kva/Documents/GitHub/SChat/src/backend/chats/" + recipient
     f = open(rfile + "/msg.txt", "w")
     f.write(msg)
     f = open(rfile + "/msglist.txt", "a")
