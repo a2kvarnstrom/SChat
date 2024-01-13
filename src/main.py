@@ -1,8 +1,3 @@
-import http.client
+import httpthingy as c
 
-connection = http.client.HTTPConnection('www.python.org')
-connection.request('GET', '/')
-response = connection.getresponse()
-print("Status: {} and reason: {}".format(response.status, response.reason))
-
-connection.close()
+c.connect()
