@@ -6,3 +6,6 @@ def connect():
     response = c.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
     connect.close = c.close()
+
+def post(type):
+    print(type)
