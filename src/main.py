@@ -1,9 +1,10 @@
 import httpthingy as c
 import PySimpleGUI as sg 
-import hashlib
+import bcrypt
 
-def passcrypt():
-    print("hi")
+def passcrypt(p):
+    salt = c.getSalt()
+    hashpass = bcrypt.hashpw(p, salt)
    
 c.connect()
 
@@ -33,4 +34,4 @@ event, values = curwin.read()
 curwin.close()
 
 
-c.connect.close
+c.close()
