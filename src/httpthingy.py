@@ -13,12 +13,12 @@ def close():
     connection.close
 
 def post(req, val):
-    print(req + "\n" + val)
-
-    data = {'type': req,
+    a = {'type': req,
             'value': val}
     
-    requests.post(url="http://192.168.0.123:1199", data=data)
+    response = requests.post(url = "http://192.168.0.123:1199", data = a)
+    print(response.text)
+    return response.text
 
 def getSalt(user):
     s = post("salt", user)

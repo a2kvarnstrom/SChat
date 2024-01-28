@@ -2,7 +2,7 @@ import httpthingy as c
 import PySimpleGUI as sg 
 import hashlib
 
-def passcrypt(p, u):
+def passcrypt(u, p):
     salt = c.getSalt(u)
     sp = p + salt
     ap = bytes(sp, 'utf-8')
@@ -23,7 +23,7 @@ def login():
     while True:
         if event == "Enter":
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
-            passcrypt()
+            passcrypt(values[0], values[1])
             break
         else:
             win.close()
