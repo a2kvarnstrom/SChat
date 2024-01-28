@@ -18,8 +18,8 @@ def post(req, val):
     data = {'type': req,
             'value': val}
     
-    requests.post(url="192.168.0.123", data=data)
+    requests.post(url="http://192.168.0.123:1199", data=data)
 
 def getSalt(user):
-    salt = post(salt, user)
-    return salt
+    s = post("salt", user)
+    return s

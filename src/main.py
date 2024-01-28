@@ -1,11 +1,14 @@
 import httpthingy as c
 import PySimpleGUI as sg 
-import bcrypt
+import hashlib
 
 def passcrypt(p, u):
     salt = c.getSalt(u)
-    hashpass = bcrypt.hashpw(p, salt)
-   
+    sp = p + salt
+    ap = bytes(sp, 'utf-8')
+    hashpass = hashlib.sha3_512(ap)
+    print(hashpass.hexdigest())
+
 c.connect()
 sg.theme("Black")
 
@@ -20,10 +23,11 @@ def login():
     while True:
         if event == "Enter":
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
+            passcrypt()
             break
         else:
             win.close()
-            c.connect.close
+            c.close()
             exit()
     win.close()
 login()
