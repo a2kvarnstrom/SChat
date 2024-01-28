@@ -3,11 +3,13 @@ import requests
 
 def connect():
     global connection
-    connection = http.client.HTTPConnection("192.168.0.123", 1199, timeout=10)
-    connection.request("POST", "/")
+    connection = http.client.HTTPConnection("uxhebxje.ddns.net", 1199, timeout=10)
+    connection.request("GET", "/")
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
 
+def postPass(p):
+    post("pass", p)
 
 def close():
     connection.close
@@ -16,8 +18,7 @@ def post(req, val):
     a = {'type': req,
             'value': val}
     
-    response = requests.post(url = "http://192.168.0.123:1199", data = a)
-    print(response.text)
+    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = a)
     return response.text
 
 def getSalt(user):
