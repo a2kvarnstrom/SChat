@@ -40,9 +40,13 @@ def recip():
     win = sg.Window("Chats", layout)
     event, values = win.read()
     while True:
-        if event == "Choose":
+        if event == "Choose" and values[0]:
             print("\nthis guy works too\nChose: " + values[0])
             break
+        else:
+            win.close()
+            c.close()
+            exit()
     win.close()
 recip()
 
