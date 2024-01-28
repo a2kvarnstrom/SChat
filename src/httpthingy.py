@@ -1,4 +1,5 @@
 import http.client
+import requests
 
 def connect():
     global connection
@@ -11,8 +12,14 @@ def connect():
 def close():
     connection.close
 
-def post(type):
-    print(type)
+def post(req, val):
+    print(req + "\n" + val)
 
-def getSalt():
-    print("hi")
+    data = {'type': req,
+            'value': val}
+    
+    requests.post(url="192.168.0.123", data=data)
+
+def getSalt(user):
+    salt = post(salt, user)
+    return salt
