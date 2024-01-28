@@ -8,8 +8,8 @@ def connect():
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
 
-def postPass(p):
-    post("pass", p)
+def postLogin(i):
+        post("login", i)
 
 def close():
     connection.close
