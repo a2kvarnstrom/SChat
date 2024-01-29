@@ -8,7 +8,8 @@ def passman(u, p):
     ap = bytes(sp, 'utf-8')
     hashpass = hashlib.sha3_512(ap)
     print(hashpass.hexdigest())
-    passuser = hashpass.hexdigest() + "t" + u
+    passuser = hashpass.hexdigest() + ":" + u
+    print(passuser)
     c.postLogin(passuser)
 
 c.connect()
