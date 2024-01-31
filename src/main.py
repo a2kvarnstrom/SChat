@@ -1,16 +1,5 @@
 import httpthingy as c
 import PySimpleGUI as sg 
-import hashlib
-
-def passman(u, p):
-    salt = c.getSalt(u)
-    sp = p + salt
-    ap = bytes(sp, 'utf-8')
-    hashpass = hashlib.sha3_512(ap)
-    print(hashpass.hexdigest())
-    passuser = hashpass.hexdigest() + ":" + u
-    print(passuser)
-    c.postLogin(passuser)
 
 c.connect()
 sg.theme("Black")
@@ -26,7 +15,7 @@ def login():
     while True:
         if event == "Enter":
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
-            passman(values[0], values[1])
+            c.passman(values[0], values[1])
             break
         else:
             win.close()
