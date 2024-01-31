@@ -1,6 +1,7 @@
 import http.client
 import requests
 import hashlib
+import json
 
 def connect():
     global connection
@@ -16,9 +17,12 @@ def close():
     connection.close
 
 def post(req, val):
-    a = {'type': req, 'value': val}
+    a = '{"type": "' + req + '", "value": "' + val + '"}'
+    b = str(a)
+    c = json.loads(b)
     print(a)
-    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = a)
+    print(b)
+    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
     print("response: " + response.text)
     return response.text
 
