@@ -19,6 +19,7 @@ def close():
 def post(req, val):
     a = '{"type": "' + req + '", "value": "' + val + '"}'
     b = str(a)
+    print("sending: " + b)
     response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
     print("response: " + response.text)
     return response.text
