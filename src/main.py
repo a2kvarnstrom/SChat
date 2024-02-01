@@ -15,8 +15,14 @@ def login():
     while True:
         if event == "Enter":
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
-            c.passman(values[0], values[1])
-            break
+            loginsuccess = c.passman(values[0], values[1])
+            if loginsuccess == "True":
+                print("yay")
+                break
+            else:
+                print("nay")
+                win.close()
+                login()
         else:
             win.close()
             c.close()

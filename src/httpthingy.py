@@ -11,7 +11,8 @@ def connect():
     print("Status: {} \nReason: {}".format(response.status, response.reason))
 
 def postLogin(i):
-        post("login", i)
+    a = post("login", i)
+    return a
 
 def close():
     connection.close
@@ -19,9 +20,6 @@ def close():
 def post(req, val):
     a = '{"type": "' + req + '", "value": "' + val + '"}'
     b = str(a)
-    c = json.loads(b)
-    print(a)
-    print(b)
     response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
     print("response: " + response.text)
     return response.text
@@ -34,12 +32,11 @@ def passman(u, p):
     salt = getSalt(u)
     sp = p + salt
     ap = bytes(sp, 'utf-8')
-    print("salt: " + salt)
-    print("pass: " + p)
     hashpass = hashlib.sha3_512(ap)
     passuser = hashpass.hexdigest() + ":" + u
-    print(passuser)
-    postLogin(passuser)
+    a = postLogin(passuser)
+    return a
+    
 
 '''
 import aiohttp
