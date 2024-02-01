@@ -38,10 +38,12 @@ def passman(u, p):
 
 def Register(u, p):
     a = u + p
-    salt = hashlib.sha3_384(a)
-    b = hashlib.sha3_512(p + salt)
-    c = u + ":" + b
-    post("register", c)
+    salt = hashlib.sha3_384(bytes(a, 'utf-8'))
+    b = p + salt.hexdigest()
+    c = hashlib.sha3_512(bytes(b, 'utf-8')).hexdigest()
+    d = u + ":" + c
+    e = post("register", d)
+    return e
 
 '''
 import aiohttp

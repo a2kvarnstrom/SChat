@@ -26,6 +26,7 @@ def login():
         elif event == "Register":
             print("\nRegister time\n")
             c.Register(values[0], values[1])
+            break
         else:
             win.close()
             c.close()
