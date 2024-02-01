@@ -8,12 +8,12 @@ def login():
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
         [sg.Text("Enter your Password"), sg.InputText()],
-        [sg.Button("Enter"), sg.Button("Cancel")]
+        [sg.Button("Login"), sg.Button("Register"), sg.Button("Cancel")]
     ]
     win = sg.Window("Login", layout)
     event, values = win.read()
     while True:
-        if event == "Enter":
+        if event == "Login":
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
@@ -23,6 +23,9 @@ def login():
                 print("nay")
                 win.close()
                 login()
+        elif event == "Register":
+            print("\nRegister time\n")
+            c.Register(values[0], values[1])
         else:
             win.close()
             c.close()

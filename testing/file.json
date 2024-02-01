@@ -1,0 +1,17 @@
+[
+    {
+      "id_number": "SA4784",
+      "name": "Mark",
+      "birthdate": null
+    },
+    {
+      "id_number": "V410Z8",
+      "name": "Vincent",
+      "birthdate": "15/02/1989"
+    },
+    {
+      "id_number": "CZ1094",
+      "name": "Paul",
+      "birthdate": "27/09/1994"
+    }
+]

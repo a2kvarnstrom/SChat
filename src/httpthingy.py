@@ -1,7 +1,6 @@
 import http.client
 import requests
 import hashlib
-import json
 
 def connect():
     global connection
@@ -36,7 +35,13 @@ def passman(u, p):
     passuser = hashpass.hexdigest() + ":" + u
     a = postLogin(passuser)
     return a
-    
+
+def Register(u, p):
+    a = u + p
+    salt = hashlib.sha3_384(a)
+    b = hashlib.sha3_512(p + salt)
+    c = u + ":" + b
+    post("register", c)
 
 '''
 import aiohttp
