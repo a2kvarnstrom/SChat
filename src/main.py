@@ -49,7 +49,7 @@ def login():
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
-                print("yay")
+                print("Login Successful")
                 break
             else:
                 print("nay")
