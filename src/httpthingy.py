@@ -43,6 +43,7 @@ def Register(u, p):
     a = u + p
     salt = hashlib.sha3_384(bytes(a, 'utf-8'))
     b = p + salt.hexdigest()
+    print(b)
     c = hashlib.sha3_512(bytes(b, 'utf-8')).hexdigest()
     d = c + ":" + u
     e = post("register", d)
