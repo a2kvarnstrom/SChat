@@ -9,10 +9,6 @@ def connect():
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
 
-def postLogin(i):
-    a = post("login", i)
-    return a
-
 def close():
     connection.close
 
@@ -23,6 +19,10 @@ def post(req, val):
     response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
     print("response: " + response.text)
     return response.text
+
+def postLogin(i):
+    a = post("login", i)
+    return a
 
 def getSalt(user):
     s = post("salt", user)
@@ -50,3 +50,6 @@ def Register(u, p):
     if e == "Username Already Taken":
         return "uname unav"
     return e
+
+def getUsers(u):
+    post("GetUsers", u)

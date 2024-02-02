@@ -12,6 +12,8 @@ def login():
     ]
     win = sg.Window("Login", layout)
     event, values = win.read()
+    global username
+    username = values[0]
     while True:
         if event == "Login":
             if values[0] == "":
@@ -128,6 +130,7 @@ def login():
 login()
 
 def recip():
+    c.getUsers(username)
     layout = [
         [sg.Text("Choose Recipient"), sg.Combo(values=['User1', 'User2'])],
         [sg.Button("Choose")]
