@@ -22,6 +22,19 @@ def login():
             else:
                 print("nay")
                 win.close()
+                layout = [
+                    [sg.Text("Invalid Username")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("Login", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
                 login()
         elif event == "Register":
             print("\nRegister time\n")

@@ -30,6 +30,8 @@ def getSalt(user):
 
 def passman(u, p):
     salt = getSalt(u)
+    if salt == "No user found":
+        return False
     sp = p + salt
     ap = bytes(sp, 'utf-8')
     hashpass = hashlib.sha3_512(ap)
