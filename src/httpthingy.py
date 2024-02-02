@@ -52,4 +52,5 @@ def Register(u, p):
     return e
 
 def getUsers(u):
-    post("GetUsers", u)
+    a = post("GetUsers", u)
+    return a

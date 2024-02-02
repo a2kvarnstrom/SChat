@@ -130,9 +130,12 @@ def login():
 login()
 
 def recip():
-    c.getUsers(username)
+    ustring = c.getUsers(username)
+    print(ustring)
+    ustring = ustring.replace("'", "")
+    ulist = ustring.strip("][").split(', ')
     layout = [
-        [sg.Text("Choose Recipient"), sg.Combo(values=['User1', 'User2'])],
+        [sg.Text("Choose Recipient"), sg.Combo(values=ulist)],
         [sg.Button("Choose")]
     ]
     win = sg.Window("Chats", layout)
