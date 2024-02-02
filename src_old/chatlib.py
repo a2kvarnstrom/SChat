@@ -44,6 +44,7 @@ def write(msg, recipient):
 
 def fetchUserList():
     i = 0
+    user = ""
     with open(userlist, "r") as file:
         users = file.read()
         userList = ("a")
