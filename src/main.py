@@ -26,7 +26,7 @@ def login():
                     [sg.Text("Invalid Username")],
                     [sg.Button("Ok")]
                 ]
-                win = sg.Window("Login", layout)
+                win = sg.Window("Invalid Username", layout)
                 event, values = win.read()
                 while True:
                     if event == "Ok":
@@ -38,7 +38,23 @@ def login():
                 login()
         elif event == "Register":
             print("\nRegister time\n")
-            c.Register(values[0], values[1])
+            a = c.Register(values[0], values[1])
+            if a == "uname unav":
+                win.close()
+                layout = [
+                    [sg.Text("Username Not Available")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("Username Unavailable", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
+                login()
             break
         else:
             win.close()
