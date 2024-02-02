@@ -49,7 +49,7 @@ def login():
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
-                print("Login Successful")
+                print("\nLogin Successful")
                 break
             else:
                 print("nay")
@@ -69,6 +69,38 @@ def login():
                         break
                 login()
         elif event == "Register":
+            if values[0] == "":
+                win.close()
+                layout = [
+                    [sg.Text("Please Enter a username")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("No Username", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
+                login()
+            elif values[1] == "":
+                win.close()
+                layout = [
+                    [sg.Text("Please Enter a password")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("No Password", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
+                login()
             print("\nRegister time\n")
             a = c.Register(values[0], values[1])
             if a == "uname unav":
