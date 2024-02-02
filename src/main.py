@@ -14,6 +14,38 @@ def login():
     event, values = win.read()
     while True:
         if event == "Login":
+            if values[0] == "":
+                win.close()
+                layout = [
+                    [sg.Text("Please Enter a username")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("No Username", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
+                login()
+            elif values[1] == "":
+                win.close()
+                layout = [
+                    [sg.Text("Please Enter a password")],
+                    [sg.Button("Ok")]
+                ]
+                win = sg.Window("No Password", layout)
+                event, values = win.read()
+                while True:
+                    if event == "Ok":
+                        win.close()
+                        break
+                    else:
+                        win.close()
+                        break
+                login()
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
