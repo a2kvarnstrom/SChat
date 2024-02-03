@@ -5,42 +5,12 @@ c.connect()
 sg.theme("Black")
 
 def login():
-    def ep():
+    def ev(a):
         layout = [
-                    [sg.Text("Please Enter a password")],
-                    [sg.Button("Ok")]
-                ]
-        win = sg.Window("No Password", layout)
-        event, values = win.read()
-        while True:
-            if event == "Ok":
-                win.close()
-                break
-            else:
-                win.close()
-                break
-        login()
-    def eu():
-        layout = [
-            [sg.Text("Please Enter a username")],
+            [sg.Text(a)],
             [sg.Button("Ok")]
         ]
-        win = sg.Window("No Username", layout)
-        event, values = win.read()
-        while True:
-            if event == "Ok":
-                win.close()
-                break
-            else:
-                win.close()
-                break
-        login()
-    def iu():
-        layout = [
-            [sg.Text("Invalid Username")],
-            [sg.Button("Ok")]
-        ]
-        win = sg.Window("Invalid Username", layout)
+        win = sg.Window("Error")
         event, values = win.read()
         while True:
             if event == "Ok":
@@ -63,31 +33,30 @@ def login():
         if event == "Login":
             if values[0] == "":
                 win.close()
-                eu()
+                ev("Please Enter a Username")
             elif values[1] == "":
                 win.close()
-                ep()
+                ev("Please Enter a Password")
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
                 print("\nLogin Successful")
                 break
             else:
-                print("nay")
                 win.close()
                 iu()
         elif event == "Register":
             if values[0] == "":
                 win.close()
-                eu()
+                ev("Please Enter a Username")
             elif values[1] == "":
                 win.close()
-                ep()
+                ev("Please Enter a Password")
             print("\nRegister time\n")
             a = c.Register(values[0], values[1])
             if a == "uname unav":
                 win.close()
-                iu()
+                ev("Username Unavailable")
             break
         else:
             win.close()
