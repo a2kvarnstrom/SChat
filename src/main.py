@@ -3,52 +3,53 @@ import PySimpleGUI as sg
 
 c.connect()
 sg.theme("Black")
-def ep():
-    layout = [
-                [sg.Text("Please Enter a password")],
-                [sg.Button("Ok")]
-            ]
-    win = sg.Window("No Password", layout)
-    event, values = win.read()
-    while True:
-        if event == "Ok":
-            win.close()
-            break
-        else:
-            win.close()
-            break
-    login()
-def eu():
-    layout = [
-        [sg.Text("Please Enter a username")],
-        [sg.Button("Ok")]
-    ]
-    win = sg.Window("No Username", layout)
-    event, values = win.read()
-    while True:
-        if event == "Ok":
-            win.close()
-            break
-        else:
-            win.close()
-            break
-    login()
-def iu():
-    layout = [
-         [sg.Text("Invalid Username")],
-        [sg.Button("Ok")]
-    ]
-    win = sg.Window("Invalid Username", layout)
-    event, values = win.read()
-    while True:
-        if event == "Ok":
-            win.close()
-            break
-        else:
-            win.close()
-            break
-    login()
+
 def login():
+    def ep():
+        layout = [
+                    [sg.Text("Please Enter a password")],
+                    [sg.Button("Ok")]
+                ]
+        win = sg.Window("No Password", layout)
+        event, values = win.read()
+        while True:
+            if event == "Ok":
+                win.close()
+                break
+            else:
+                win.close()
+                break
+        login()
+    def eu():
+        layout = [
+            [sg.Text("Please Enter a username")],
+            [sg.Button("Ok")]
+        ]
+        win = sg.Window("No Username", layout)
+        event, values = win.read()
+        while True:
+            if event == "Ok":
+                win.close()
+                break
+            else:
+                win.close()
+                break
+        login()
+    def iu():
+        layout = [
+            [sg.Text("Invalid Username")],
+            [sg.Button("Ok")]
+        ]
+        win = sg.Window("Invalid Username", layout)
+        event, values = win.read()
+        while True:
+            if event == "Ok":
+                win.close()
+                break
+            else:
+                win.close()
+                break
+        login()
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
         [sg.Text("Enter your Password"), sg.InputText()],
