@@ -20,23 +20,13 @@ def post(req, val):
     print("response: " + response.text)
     return response.text
 
-def postLogin(i):
-    a = post("login", i)
-    return a
-
-def getSalt(user):
-    s = post("salt", user)
-    return s
-
 def passman(u, p):
-    salt = getSalt(u)
+    salt = post("salt", u)
     if salt == "No user found":
         return False
-    sp = p + salt
-    ap = bytes(sp, 'utf-8')
-    hashpass = hashlib.sha3_512(ap)
-    passuser = hashpass.hexdigest() + ":" + u
-    a = postLogin(passuser)
+    ap = bytes(p + salt, 'utf-8')
+    send = hashlib.sha3_512(ap).hexdigest() + ":" + u
+    a = post("login", send)
     return a
 
 def Register(u, p):
