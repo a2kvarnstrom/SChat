@@ -20,9 +20,9 @@ def ep():
     login()
 def eu():
     layout = [
-                [sg.Text("Please Enter a username")],
-                [sg.Button("Ok")]
-            ]
+        [sg.Text("Please Enter a username")],
+        [sg.Button("Ok")]
+    ]
     win = sg.Window("No Username", layout)
     event, values = win.read()
     while True:
@@ -33,6 +33,22 @@ def eu():
             win.close()
             break
     login()
+def iu():
+    layout = [
+         [sg.Text("Invalid Username")],
+        [sg.Button("Ok")]
+    ]
+    win = sg.Window("Invalid Username", layout)
+    event, values = win.read()
+    while True:
+        if event == "Ok":
+            win.close()
+            break
+        else:
+            win.close()
+            break
+    login()
+
 def login():
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
@@ -59,20 +75,7 @@ def login():
             else:
                 print("nay")
                 win.close()
-                layout = [
-                    [sg.Text("Invalid Username")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("Invalid Username", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                iu()
         elif event == "Register":
             if values[0] == "":
                 win.close()
@@ -84,20 +87,7 @@ def login():
             a = c.Register(values[0], values[1])
             if a == "uname unav":
                 win.close()
-                layout = [
-                    [sg.Text("Username Not Available")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("Username Unavailable", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                iu()
             break
         else:
             win.close()
