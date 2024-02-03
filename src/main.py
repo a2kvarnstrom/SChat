@@ -6,13 +6,12 @@ sg.theme("Black")
 
 def login():
     def ev(a):
-        print(type(a))
         layout = [
             [sg.Text(a)],
             [sg.Button("Ok")]
         ]
-        win = sg.Window("Error")
-        event, values = win.read()
+        win = sg.Window("Error", layout)
+        event, values= win.read()
         while True:
             if event == "Ok":
                 win.close()
