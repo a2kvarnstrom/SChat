@@ -6,6 +6,7 @@ sg.theme("Black")
 
 def login():
     def ev(a):
+        print(type(a))
         layout = [
             [sg.Text(a)],
             [sg.Button("Ok")]
