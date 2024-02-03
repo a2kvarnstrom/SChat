@@ -44,7 +44,7 @@ def login():
                 break
             else:
                 win.close()
-                iu()
+                ev("Login Failed")
         elif event == "Register":
             if values[0] == "":
                 win.close()
