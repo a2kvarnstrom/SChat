@@ -3,7 +3,6 @@ import PySimpleGUI as sg
 
 c.connect()
 sg.theme("Black")
-
 def ep():
     layout = [
                 [sg.Text("Please Enter a password")],
@@ -34,7 +33,6 @@ def eu():
             win.close()
             break
     login()
-
 def login():
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
