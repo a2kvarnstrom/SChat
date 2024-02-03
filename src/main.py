@@ -4,6 +4,37 @@ import PySimpleGUI as sg
 c.connect()
 sg.theme("Black")
 
+def ep():
+    layout = [
+                [sg.Text("Please Enter a password")],
+                [sg.Button("Ok")]
+            ]
+    win = sg.Window("No Password", layout)
+    event, values = win.read()
+    while True:
+        if event == "Ok":
+            win.close()
+            break
+        else:
+            win.close()
+            break
+    login()
+def eu():
+    layout = [
+                [sg.Text("Please Enter a username")],
+                [sg.Button("Ok")]
+            ]
+    win = sg.Window("No Username", layout)
+    event, values = win.read()
+    while True:
+        if event == "Ok":
+            win.close()
+            break
+        else:
+            win.close()
+            break
+    login()
+
 def login():
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
@@ -18,36 +49,10 @@ def login():
         if event == "Login":
             if values[0] == "":
                 win.close()
-                layout = [
-                    [sg.Text("Please Enter a username")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("No Username", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                eu()
             elif values[1] == "":
                 win.close()
-                layout = [
-                    [sg.Text("Please Enter a password")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("No Password", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                ep()
             print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
@@ -73,36 +78,10 @@ def login():
         elif event == "Register":
             if values[0] == "":
                 win.close()
-                layout = [
-                    [sg.Text("Please Enter a username")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("No Username", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                eu()
             elif values[1] == "":
                 win.close()
-                layout = [
-                    [sg.Text("Please Enter a password")],
-                    [sg.Button("Ok")]
-                ]
-                win = sg.Window("No Password", layout)
-                event, values = win.read()
-                while True:
-                    if event == "Ok":
-                        win.close()
-                        break
-                    else:
-                        win.close()
-                        break
-                login()
+                ep()
             print("\nRegister time\n")
             a = c.Register(values[0], values[1])
             if a == "uname unav":

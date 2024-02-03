@@ -30,12 +30,10 @@ def passman(u, p):
     return a
 
 def Register(u, p):
-    a = u + p
-    salt = hashlib.sha3_384(bytes(a, 'utf-8'))
-    b = p + salt.hexdigest()
-    print(b)
+    salt = hashlib.sha3_384(bytes(u + p, 'utf-8')).hexdigest()
+    b = p + salt
     c = hashlib.sha3_512(bytes(b, 'utf-8')).hexdigest()
-    d = salt.hexdigest() + ":" + c + ":" + u
+    d = salt + ":" + c + ":" + u
     e = post("register", d)
     if e == "Username Already Taken":
         return "uname unav"
