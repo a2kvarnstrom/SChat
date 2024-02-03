@@ -52,7 +52,7 @@ def login():
         login()
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
-        [sg.Text("Enter your Password"), sg.InputText()],
+        [sg.Text("Enter your Password"), sg.InputText(password_char='•')],
         [sg.Button("Login"), sg.Button("Register"), sg.Button("Cancel")]
     ]
     win = sg.Window("Login", layout)
