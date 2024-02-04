@@ -1,6 +1,5 @@
 import httpthingy as c
 import PySimpleGUI as sg 
-import time
 
 c.connect()
 sg.theme("Black")
