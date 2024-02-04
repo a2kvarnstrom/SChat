@@ -75,15 +75,34 @@ def chat():
     ]
     win = sg.Window("Chats", layout)
     event, values = win.read()
+    global recipient
+    recipient = values[0]
     while True:
         if event == "Choose" and values[0]:
             print("\nthis guy works too\nChose: " + values[0])
+            c.recip(values[0])
             break
         else:
             win.close()
             c.close()
             exit()
     win.close()
+    layout = [
+        [sg.Multiline(size=(100, 70), expand_x=True, expand_y=True, write_only=True, autoscroll=True, auto_refresh=True)],
+        [sg.InputText()],
+        [sg.Button("Send")]
+    ]
+    win = sg.Window("Chats", layout)
+    while True:
+        event, values = win.read()
+        if event == "Send":
+            print(values)
+            c.send(username, values[1], recipient)
+            event = None
+        else:
+            win.close()
+            c.close()
+            exit()
 chat() 
 
 c.close()

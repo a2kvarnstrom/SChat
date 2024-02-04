@@ -42,3 +42,13 @@ def Register(u, p):
 def getUsers(u):
     a = post("GetUsers", u)
     return a
+
+def recip(u):
+    a = print("\nPlaceholder Code\n")
+    return a
+
+def send(u, s, r):
+    print("sending: " + '{"type":"send", "value":{"msg":"' + s + '", "sender":"' + u + '", "recipient":"' + r + '"}}')
+    a = requests.post(url = "http://uxhebxje.ddns.net:1199", data = '{"type":"send", "value":{"msg":"' + s + '", "sender":"' + u + '", "recipient":"' + r + '"}}').text
+    print("response: " + a)
+    return a
