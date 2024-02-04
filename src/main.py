@@ -30,6 +30,7 @@ def login():
     global username
     username = values[0]
     while True:
+        event, values = win.read()
         if event == "Login":
             if values[0] == "":
                 win.close()
@@ -92,7 +93,7 @@ def chat():
         [sg.Button("Send")]
     ]
     win = sg.Window("Chats", layout, finalize=True)
-    msgHistory = c.recip(recipient, username)
+    msgHistory = c.getMsgHistory(recipient, username)
     sg.cprint(msgHistory)
     while True:
         event, values = win.read()

@@ -43,7 +43,7 @@ def getUsers(u):
     a = post("GetUsers", str('"' + u + '"'))
     return a
 
-def recip(r, u):
+def getMsgHistory(r, u):
     a = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'))
     return a
 
