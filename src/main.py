@@ -1,5 +1,6 @@
 import httpthingy as c
 import PySimpleGUI as sg 
+import time
 
 c.connect()
 sg.theme("Black")
@@ -70,7 +71,7 @@ def chat():
     ustring = ustring.replace("'", "")
     ulist = ustring.strip("][").split(', ')
     layout = [
-        [sg.Text("Chat"), sg.Combo(values=ulist)],
+        [sg.Text("Chat"), sg.OptionMenu(values=ulist)],
         [sg.Button("Choose")]
     ]
     win = sg.Window("Chats", layout)
@@ -80,7 +81,6 @@ def chat():
     while True:
         if event == "Choose" and values[0]:
             print("\nthis guy works too\nChose: " + values[0])
-            c.recip(values[0])
             break
         else:
             win.close()
@@ -88,16 +88,18 @@ def chat():
             exit()
     win.close()
     layout = [
-        [sg.Multiline(size=(100, 70), expand_x=True, expand_y=True, write_only=True, autoscroll=True, auto_refresh=True)],
+        [sg.Multiline(size=(100, 70), expand_x=True, expand_y=True, write_only=True, autoscroll=True, reroute_cprint=True, auto_refresh=True)],
         [sg.InputText()],
         [sg.Button("Send")]
     ]
-    win = sg.Window("Chats", layout)
+    win = sg.Window("Chats", layout, finalize=True)
+    msgHistory = c.recip(recipient, username)
+    sg.cprint(msgHistory)
     while True:
         event, values = win.read()
         if event == "Send":
-            print(values)
-            c.send(username, values[1], recipient)
+            msg = c.send(username, values[1], recipient)
+            sg.cprint(msg)
             event = None
         else:
             win.close()
