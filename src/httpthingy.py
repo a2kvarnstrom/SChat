@@ -4,7 +4,7 @@ import hashlib
 
 def connect():
     global connection
-    connection = http.client.HTTPConnection("uxhebxje.ddns.net", 1199, timeout=10)
+    connection = http.client.HTTPConnection("uxhebxje.ddns.net", timeout=10)
     connection.request("GET", "/")
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
@@ -16,7 +16,7 @@ def post(req, val):
     a = '{"type": "' + req + '", "value": ' + val + '}'
     b = str(a)
     print("sending: " + b)
-    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
+    response = requests.post(url = "http://uxhebxje.ddns.net", data = b)
     print("response: " + response.text)
     return response.text
 
