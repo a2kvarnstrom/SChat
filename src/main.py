@@ -26,8 +26,8 @@ def login():
         [sg.Button("Login"), sg.Button("Register"), sg.Button("Cancel")]
     ]
     win = sg.Window("Login", layout)
+    event, values = win.read()
     while True:
-        event, values = win.read()
         global username
         username = values[0]
         if event == "Login":
