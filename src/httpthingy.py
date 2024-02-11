@@ -17,7 +17,8 @@ def post(req, val):
     b = str(a)
     print("sending: " + b)
     response = requests.post(url = "http://uxhebxje.ddns.net", data = b)
-    print("response: " + response.text)
+    if req != "getNewMsgs":
+        print("response: " + response.text)
     return response.text
 
 def passman(u, p):
@@ -44,10 +45,15 @@ def getUsers(u):
     return a
 
 def getMsgHistory(r, u):
-    a = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'))
-    return a
+    global msgHistory
+    msgHistory = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'))
+    return msgHistory
 
 def send(u, s, r):
     a = '{"msg":"' + s + '", "sender":"' + u + '", "recipient":"' + r + '"}'
     b = post("send", a)
     return b
+
+def messagePoll(u, r):
+    a = post("getNewMsgs", '"' + u + ':' + r + '"')
+    return a

@@ -1,5 +1,6 @@
 import httpthingy as c
-import PySimpleGUI as sg 
+import PySimpleGUI as sg
+from time import sleep
 
 c.connect()
 sg.theme("Black")
@@ -37,7 +38,7 @@ def login():
             elif values[1] == "":
                 win.close()
                 ev("Please Enter a Password")
-            print("\nthis thing works\nUsername: " + values[0] + "\nPass: " + values[1])
+            print("\nthis thing works")
             loginsuccess = c.passman(values[0], values[1])
             if loginsuccess == "True":
                 print("\nLogin Successful")
@@ -66,6 +67,8 @@ def login():
 login()
 
 def chat():
+    global Running
+    Running = True
     ustring = c.getUsers(username)
     ustring = ustring.replace("'", "")
     ulist = ustring.strip("][").split(', ')
@@ -84,6 +87,7 @@ def chat():
         else:
             win.close()
             c.close()
+            Running = False
             exit()
     win.close()
     layout = [
@@ -94,6 +98,16 @@ def chat():
     win = sg.Window("Chats", layout, finalize=True)
     msgHistory = c.getMsgHistory(recipient, username)
     sg.cprint(msgHistory)
+    def messagePoll():
+        nonlocal msgHistory
+        a = c.messagePoll(username, recipient)
+        b = a.removeprefix(msgHistory)
+        if b == msg:
+            return
+        msgHistory = msgHistory + b
+        if b != "":
+            sg.cprint(b)
+        return
     while True:
         event, values = win.read()
         if event == "Send":
@@ -103,7 +117,10 @@ def chat():
         else:
             win.close()
             c.close()
+            Running = False
             exit()
-chat() 
+        messagePoll()
+chat()
 
+Running = False
 c.close()
