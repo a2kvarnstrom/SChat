@@ -12,12 +12,13 @@ def connect():
 def close():
     connection.close
 
-def post(req, val):
+def post(req, val, doPrint=True):
     a = '{"type": "' + req + '", "value": ' + val + '}'
     b = str(a)
-    print("sending: " + b)
+    if doPrint:
+        print("sending: " + b)
     response = requests.post(url = "http://uxhebxje.ddns.net", data = b)
-    if req != "getNewMsgs":
+    if doPrint:
         print("response: " + response.text)
     return response.text
 
@@ -54,6 +55,6 @@ def send(u, s, r):
     b = post("send", a)
     return b
 
-def messagePoll(u, r):
+def messagePoll(u, r, doPrint=False):
     a = post("getNewMsgs", '"' + u + ':' + r + '"')
     return a
