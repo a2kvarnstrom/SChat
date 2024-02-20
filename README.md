@@ -1,2 +1,2 @@
 # SChat
-Unfinished and mostly secure chat application written mostly in python
+Unfinished chat application written mostly in python
