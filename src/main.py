@@ -1,6 +1,7 @@
 import httpthingy as c
 import PySimpleGUI as sg
 from time import sleep
+import asyncio
 
 c.connect()
 sg.theme("Black")
@@ -98,7 +99,8 @@ def chat():
     win = sg.Window("Chats", layout, finalize=True)
     msgHistory = c.getMsgHistory(recipient, username)
     sg.cprint(msgHistory)
-    def messagePoll():
+    async def messagePoll():
+        sleep(0.5)
         nonlocal msgHistory
         a = c.messagePoll(username, recipient)
         b = a.removeprefix(msgHistory)
@@ -108,6 +110,7 @@ def chat():
         if b != "":
             sg.cprint(b)
         return
+    asyncio.run(messagePoll())
     while True:
         event, values = win.read()
         if event == "Send":
@@ -119,7 +122,6 @@ def chat():
             c.close()
             Running = False
             exit()
-        messagePoll()
 chat()
 
 Running = False
