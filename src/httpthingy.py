@@ -4,7 +4,7 @@ import hashlib
 
 def connect():
     global connection
-    connection = http.client.HTTPConnection("uxhebxje.ddns.net", timeout=10)
+    connection = http.client.HTTPConnection("uxhebxje.ddns.net", 1199, timeout=10)
     connection.request("GET", "/")
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
@@ -15,10 +15,10 @@ def close():
 def post(req, val, doPrint=True):
     a = '{"type": "' + req + '", "value": ' + val + '}'
     b = str(a)
-    if doPrint:
+    if doPrint == True:
         print("sending: " + b)
-    response = requests.post(url = "http://uxhebxje.ddns.net", data = b)
-    if doPrint:
+    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
+    if doPrint == True:
         print("response: " + response.text)
     return response.text
 
@@ -47,7 +47,7 @@ def getUsers(u):
 
 def getMsgHistory(r, u):
     global msgHistory
-    msgHistory = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'))
+    msgHistory = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'), doPrint=False)
     return msgHistory
 
 def send(u, s, r):
@@ -55,6 +55,6 @@ def send(u, s, r):
     b = post("send", a)
     return b
 
-def messagePoll(u, r, doPrint=False):
-    a = post("getNewMsgs", '"' + u + ':' + r + '"')
+def messagePoll(u, r):
+    a = post("getNewMsgs", '"' + u + ':' + r + '"', doPrint=False)
     return a
