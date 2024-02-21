@@ -1,6 +1,6 @@
 import httpthingy as c
 import PySimpleGUI as sg
-import asyncio
+import threading
 from time import sleep
 
 c.connect()
@@ -91,26 +91,27 @@ def chat():
             Running = False
             exit()
     win.close()
-    async def messagePoll():
-        while True:
+    def messagePoll():
+        while Running:
             sleep(1)
             nonlocal msgHistory
             nonlocal msg
             a = c.messagePoll(username, recipient)
             b = a.replace(msgHistory, '')
             msgHistory = a
-            # if b != "":
-                # sg.cprint(b)
+            if b != "":
+                sg.cprint(b)
     msg = ""
-    msgHistory = ""
-    asyncio.run(messagePoll())
+    msgHistory = c.getMsgHistory(recipient, username)
+    t1 = threading.Thread(messagePoll())
+    t1.start()
+    print("why no worki")
     layout = [
         [sg.Multiline(size=(100, 70), expand_x=True, expand_y=True, write_only=True, autoscroll=True, reroute_cprint=True, auto_refresh=True)],
         [sg.InputText()],
         [sg.Button("Send")]
     ]
-    win = sg.Window("Chats", layout, finalize=True)
-    msgHistory = c.getMsgHistory(recipient, username)    
+    win = sg.Window("Chats", layout, finalize=True)    
     while True:
         event, values = win.read()
         if event == "Send":
