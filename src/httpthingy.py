@@ -17,10 +17,9 @@ def close():
 
 def post(req, val, doPrint=True):
     a = '{"type": "%s", "value": %s}' % (req, val)
-    b = str(a)
     if doPrint == True:
-        print("sending: " + b)
-    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = b)
+        print("sending: " + a)
+    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = a)
     if doPrint == True:
         print("response: " + response.text)
     return response.text
