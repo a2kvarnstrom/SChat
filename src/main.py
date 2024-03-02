@@ -123,7 +123,8 @@ def chat():
         [sg.InputText()],
         [sg.Button("Send")]
     ]
-    win = sg.Window("Chats", layout, finalize=True)    
+    win = sg.Window("Chats", layout, finalize=True)
+    sg.cprint(msgHistory)
     while True:
         event, values = win.read()
         if event == "Send":

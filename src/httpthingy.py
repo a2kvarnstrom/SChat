@@ -16,7 +16,7 @@ def close():
     connection.close
 
 def post(req, val, doPrint=True):
-    a = '{"type": "' + req + '", "value": ' + val + '}'
+    a = '{"type": "%s", "value": %s}' % (req, val)
     b = str(a)
     if doPrint == True:
         print("sending: " + b)
@@ -51,7 +51,6 @@ def getUsers(u):
 def getMsgHistory(r, u):
     global msgHistory
     msgHistory = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'), doPrint=False)
-    print(msgHistory)
     return msgHistory
 
 def send(u, s, r):
