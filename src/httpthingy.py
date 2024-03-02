@@ -5,7 +5,10 @@ import hashlib
 def connect():
     global connection
     connection = http.client.HTTPConnection("uxhebxje.ddns.net", 1199, timeout=10)
-    connection.request("GET", "/")
+    try:
+        connection.request("GET", "/")
+    except ConnectionRefusedError:
+        return False
     response = connection.getresponse()
     print("Status: {} \nReason: {}".format(response.status, response.reason))
 
@@ -48,6 +51,7 @@ def getUsers(u):
 def getMsgHistory(r, u):
     global msgHistory
     msgHistory = post("GetMsgHistory", str('{"s":"' + u + '", "r":"' + r + '"}'), doPrint=False)
+    print(msgHistory)
     return msgHistory
 
 def send(u, s, r):

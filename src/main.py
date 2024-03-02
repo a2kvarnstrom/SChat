@@ -3,8 +3,19 @@ import PySimpleGUI as sg
 import threading
 from time import sleep
 
-c.connect()
 sg.theme("Black")
+connectionSuccess = c.connect()
+if connectionSuccess == False:
+    layout = [
+        [sg.Text("The connection could not establish.")],
+        [sg.Ok()]
+    ]
+    window = sg.Window("Connection Failed", layout)
+    event, values = window.read()
+    while True:
+        if event == "Ok":
+            win.close()
+            exit()
 
 def login():
     def ev(a):
