@@ -14,7 +14,7 @@ if connectionSuccess == False:
     event, values = window.read()
     while True:
         if event == "Ok":
-            win.close()
+            window.close()
             exit()
 
 def login():
