@@ -132,11 +132,11 @@ def chat():
             msg = c.send(username, values[1], recipient)
         elif event == 'Enter is pressed':
             msg = c.send(username, values[1], recipient)
-        # else:
-        #    win.close()
-        #    c.close()
-        #    Running = False
-        #    exit()
+        elif sg.WINDOW_CLOSED:
+            win.close()
+            c.close()
+            Running = False
+            exit()
 chat()
 
 Running = False
