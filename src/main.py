@@ -83,7 +83,7 @@ def chat():
     Running = True
     ustring = c.getUsers(username)
     ustring = ustring.replace("'", "")
-    ulist = ustring.strip("][").split(', ')
+    ulist = ustring.strip("[]").split(', ')
     layout = [
         [sg.Text("Chat"), sg.OptionMenu(values=ulist)],
         [sg.Button("Choose")]
@@ -102,40 +102,41 @@ def chat():
             Running = False
             exit()
     win.close()
-    # def messagePoll():
-    #     while Running:
-    #         sleep(1)
-    #         nonlocal msgHistory
-    #         nonlocal msg
-    #         a = c.messagePoll(username, recipient)
-    #         b = a.replace(msgHistory, '')
-    #         msgHistory = a
-    #         if b != "":
-    #             sg.cprint(b)
-    
-    # t1 = threading.Thread(messagePoll())
-    # t1.start()
-    # print("why no worki")
+    def messagePoll():
+        nonlocal msgHistory
+        nonlocal msg
+        a = c.messagePoll(username, recipient)
+        b = a.replace(msgHistory, '')
+        msgHistory = a
+        if b != "":
+            sg.cprint(b)
+        return
+
     msg = ""
     msgHistory = c.getMsgHistory(recipient, username)
     layout = [
-        [sg.Multiline(size=(100, 70), expand_x=True, expand_y=True, write_only=True, autoscroll=True, reroute_cprint=True, auto_refresh=True)],
+        [sg.Multiline(size=(50, 35), expand_x=True, expand_y=True, write_only=True, autoscroll=True,
+                      reroute_cprint=True, auto_refresh=True)],
         [sg.InputText()],
-        [sg.Button("Send")]
+        [sg.Button("Send", key='Send'), sg.Button('Receive', key='Rr')]
     ]
     win = sg.Window("Chats", layout, finalize=True)
+    button = win['Send']
+    win.bind('<Return>', 'Enter is pressed')
+
     sg.cprint(msgHistory)
     while True:
-        event, values = win.read()
+        messagePoll()
+        event, values = win.read(timeout=1000)
         if event == "Send":
             msg = c.send(username, values[1], recipient)
-            sg.cprint(msg)
-            event = None
-        else:
-            win.close()
-            c.close()
-            Running = False
-            exit()
+        elif event == 'Enter is pressed':
+            msg = c.send(username, values[1], recipient)
+        # else:
+        #    win.close()
+        #    c.close()
+        #    Running = False
+        #    exit()
 chat()
 
 Running = False
