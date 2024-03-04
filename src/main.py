@@ -1,7 +1,5 @@
 import httpthingy as c
 import PySimpleGUI as sg
-import threading
-from time import sleep
 
 sg.theme("Black")
 connectionSuccess = c.connect()
