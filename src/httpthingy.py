@@ -58,5 +58,8 @@ def send(u, s, r):
     return b
 
 def messagePoll(u, r):
-    a = post("getNewMsgs", '"' + u + ':' + r + '"', doPrint=False)
+    try:
+        a = post("getNewMsgs", '"' + u + ':' + r + '"', doPrint=False)
+    except requests.exceptions.ConnectionError:
+        return "Connection Error"
     return a

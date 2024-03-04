@@ -17,6 +17,7 @@ if connectionSuccess == False:
             window.close()
             exit()
 
+
 def login():
     def ev(a):
         layout = [
@@ -33,6 +34,7 @@ def login():
                 win.close()
                 break
         login()
+
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
         [sg.Text("Enter your Password"), sg.InputText(password_char='•')],
@@ -76,11 +78,12 @@ def login():
             c.close()
             exit()
     win.close()
+
+
 login()
 
+
 def chat():
-    global Running
-    Running = True
     ustring = c.getUsers(username)
     ustring = ustring.replace("'", "")
     ulist = ustring.strip("[]").split(', ')
@@ -99,29 +102,45 @@ def chat():
         else:
             win.close()
             c.close()
-            Running = False
             exit()
     win.close()
+
     def messagePoll():
         nonlocal msgHistory
-        nonlocal msg
+        nonlocal win
         a = c.messagePoll(username, recipient)
+        if a == "Connection Error":
+            win.close()
+            layout = [
+                [sg.Text("The server is currently unreachable.")],
+                [sg.Text("Please try again later.")],
+                [sg.Button("Ok")]
+            ]
+            win = sg.Window("Server unreachable", layout)
+            win.read()
+            while True:
+                if sg.WINDOW_CLOSED:
+                    win.close()
+                    c.close()
+                    exit()
+                else:
+                    win.close()
+                    c.close()
+                    exit()
         b = a.replace(msgHistory, '')
         msgHistory = a
         if b != "":
             sg.cprint(b)
         return
 
-    msg = ""
     msgHistory = c.getMsgHistory(recipient, username)
     layout = [
         [sg.Multiline(size=(50, 35), expand_x=True, expand_y=True, write_only=True, autoscroll=True,
                       reroute_cprint=True, auto_refresh=True)],
         [sg.InputText()],
-        [sg.Button("Send", key='Send'), sg.Button('Receive', key='Rr')]
+        [sg.Button("Send", key='Send')]
     ]
     win = sg.Window("Chats", layout, finalize=True)
-    button = win['Send']
     win.bind('<Return>', 'Enter is pressed')
 
     sg.cprint(msgHistory)
@@ -129,15 +148,15 @@ def chat():
         messagePoll()
         event, values = win.read(timeout=1000)
         if event == "Send":
-            msg = c.send(username, values[1], recipient)
+            c.send(username, values[1], recipient)
         elif event == 'Enter is pressed':
-            msg = c.send(username, values[1], recipient)
+            c.send(username, values[1], recipient)
         elif sg.WINDOW_CLOSED:
             win.close()
             c.close()
-            Running = False
             exit()
+
+
 chat()
 
-Running = False
 c.close()
