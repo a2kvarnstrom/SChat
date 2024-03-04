@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 
 sg.theme("Black")
 connectionSuccess = c.connect()
-if not connectionSuccess:
+if connectionSuccess == False:
     layout = [
         [sg.Text("The connection could not establish.")],
         [sg.Ok()]
