@@ -15,7 +15,6 @@ if connectionSuccess == False:
             window.close()
             exit()
 
-
 def login():
     def ev(a):
         layout = [
@@ -32,7 +31,6 @@ def login():
                 win.close()
                 break
         login()
-
     layout = [
         [sg.Text("Enter your Username"), sg.InputText()],
         [sg.Text("Enter your Password"), sg.InputText(password_char='•')],
@@ -77,9 +75,7 @@ def login():
             exit()
     win.close()
 
-
 login()
-
 
 def chat():
     ustring = c.getUsers(username)
@@ -102,7 +98,6 @@ def chat():
             c.close()
             exit()
     win.close()
-
     def messagePoll():
         nonlocal msgHistory
         nonlocal win
@@ -154,7 +149,5 @@ def chat():
             c.close()
             exit()
 
-
 chat()
-
 c.close()
