@@ -74,7 +74,6 @@ def login():
             c.close()
             exit()
     win.close()
-
 login()
 
 def chat():
@@ -148,6 +147,7 @@ def chat():
             win.close()
             c.close()
             exit()
+
 
 chat()
 c.close()
