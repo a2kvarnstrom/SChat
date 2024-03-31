@@ -39,18 +39,6 @@ def Register(u, p):
     b = p + salt
     c = hashlib.sha3_512(bytes(b, 'utf-8')).hexdigest()
     d = '{"salt":"%s", "pass":"%s", "uname":"%s"}' % (salt, c, u)
-
-    ''' 
-        {
-            "type": "register", 
-            "value": {
-                "salt": "salt",
-                "pass": "test", 
-                "uname": "test"
-            }
-        }
-    '''
-    
     e = post("register", d)
     if e == "Username Already Taken":
         return "uname unav"
