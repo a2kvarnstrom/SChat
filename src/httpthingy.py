@@ -4,7 +4,7 @@ import hashlib
 
 def connect():
     global connection
-    connection = http.client.HTTPConnection("uxhebxje.ddns.net", 1199, timeout=10)
+    connection = http.client.HTTPConnection("192.168.0.5", 1199, timeout=10)
     try:
         connection.request("GET", "/")
     except ConnectionRefusedError:
@@ -19,7 +19,7 @@ def post(req, val, doPrint=True):
     a = '{"type": "%s", "value": %s}' % (req, val)
     if doPrint == True:
         print("sending: " + a)
-    response = requests.post(url = "http://uxhebxje.ddns.net:1199", data = a)
+    response = requests.post(url = "http://192.168.0.5:1199", data = a)
     if doPrint == True:
         print("response: " + response.text)
     return response.text
@@ -29,16 +29,29 @@ def passman(u, p):
     if salt == "No user found":
         return False
     ap = bytes(p + salt, 'utf-8')
-    send = "%s:%s" % (hashlib.sha3_512(ap).hexdigest(), u)
-    a = post("login", '"%s"' % send)
+    password = hashlib.sha3_512(ap).hexdigest()
+    send = '{"uname":"%s", "pass":"%s"}' % (u, password)
+    a = post("login", send)
     return a
 
 def Register(u, p):
     salt = hashlib.sha3_384(bytes(u + p, 'utf-8')).hexdigest()
     b = p + salt
     c = hashlib.sha3_512(bytes(b, 'utf-8')).hexdigest()
-    d = "%s:%s:%s" % (salt, c, u)
-    e = post("register", '"%s"' % d)
+    d = '{"salt":"%s", "pass":"%s", "uname":"%s"}' % (salt, c, u)
+
+    ''' 
+        {
+            "type": "register", 
+            "value": {
+                "salt": "salt",
+                "pass": "test", 
+                "uname": "test"
+            }
+        }
+    '''
+    
+    e = post("register", d)
     if e == "Username Already Taken":
         return "uname unav"
     return e
